@@ -1,11 +1,13 @@
-const express = require("express");
-const cors = require("cors");
-// const ethers = require("ethers");
+import Express from "express";
+
+import { makeChain, insertRecord, getRecord } from "./web3connector.cjs";
 const port = 80;
 
-app = express();
+let app = Express();
 
-app.post("/fileFIR", (req, res) => {
+app.get("/fileFIR", (req, res) => {
+  let complain = "";
+  makeChain().then((contract) => insertRecord(contract, complain));
   res.send("Complain has been filed!!");
 });
 app.listen(port, () => {
