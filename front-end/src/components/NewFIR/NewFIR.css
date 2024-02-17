@@ -1,0 +1,96 @@
+
+.formHolder{
+    display: flex;
+    justify-content: center;
+}
+#main{
+    width:600px;
+    background-color: aliceblue;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* justify-content: center; */
+    border-radius: 10px;
+   /* / max-height: 70vh; */ 
+   margin: 0;
+   padding: 0;
+    /* overflow-y: scroll; */
+    /* padding-bottom: 30px; */
+}
+
+#main h1{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    color: #0a0403;
+    font-size: 2rem;
+    font-family: "Poppins-Bold", sans-serif;
+    font-weight: 600;
+}
+
+/* Detail input */
+.inputclass{
+    width:250px;
+    height: 40px;
+    margin-left:30px;
+}
+
+.outerdetailsbox h2{
+    margin-top: 30px;
+    margin-left: 30px;
+}
+
+.detailsbox{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+}
+
+.detailsbox label{
+    margin-top: 10px;
+    margin-left: 30px;
+}
+
+.innerdetailsbox{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+/* Submit button */
+.submitbutton{
+    display: flex;
+    justify-content: center;
+}
+
+#submit{
+    width:150px;
+    height: 30px;
+    margin: 30px;
+    border-radius: 20px;
+    background-color: rgb(9, 130, 216);
+    color: white;
+    font-size: 1.2rem;
+}
+#submit:hover{
+    background-color: rgb(18, 205, 115);
+    transition: 0.3s;
+    box-shadow: 1px 3px 20px 1px rgb(18, 161, 92);
+}
+#crimedescription,#Others{
+    width: 512px;
+    padding:10px
+}
+/* CheckBoxes */
+.checkbox{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 30px;
+    text-align: center;
+}
+
+.checkbox input{
+    width: 20px;
+    height: 20px;
+    transform: translateY(-0.5px);
+    margin-right: 5px;
+}
