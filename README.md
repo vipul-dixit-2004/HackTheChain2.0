@@ -1,4 +1,4 @@
-# Decentralised F.I.R.
+# Crypto F.I.R.
 
 ## Blockchain-based Secure Storage for First Investigation Reports
 
