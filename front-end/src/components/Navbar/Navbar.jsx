@@ -6,7 +6,7 @@ export default function Navbar({ location }) {
     <>
       <nav>
         <div className="logo">
-          <Link to="/DashBoard">
+          <Link to="/Dashboard">
             <img src={logo} alt="" height={"80px"} />
           </Link>
         </div>
@@ -16,7 +16,7 @@ export default function Navbar({ location }) {
         {location == "http://localhost:5173/Dashboard" ? (
           <Link to="/newFIR">File New FIR</Link>
         ) : (
-          <Link to="/DashBoard">DashBoard</Link>
+          <Link to="/Dashboard">Dashboard</Link>
         )}
       </nav>
     </>

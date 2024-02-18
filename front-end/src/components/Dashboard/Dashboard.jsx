@@ -51,7 +51,7 @@ export default function Dashboard() {
       const provider = await connectToMetaMask();
       const signer = provider.getSigner();
 
-      const contractAddress = "0x947922D0C4E4e7c11BFAB575b08514824023B614";
+      const contractAddress = "0x29c91ade29644C7cDDCEBBa2D54401730951D7f8";
       const contractABI = [
         {
           constant: false,
@@ -186,7 +186,11 @@ export default function Dashboard() {
         data={decrypted}
         closeModal={closeModal}
       ></Modal>
-
+      {/* {rows == 0 ? (
+        <>
+          <h1>No Complain Registered...</h1>
+        </>
+      ) : ( */}
       <CardHolder
         row={rows}
         functionHandler={getRecord}
@@ -195,6 +199,7 @@ export default function Dashboard() {
         setDecrypted={setDecrypted}
         modalFunction={openModal}
       />
+      {/* )} */}
     </>
   );
 }

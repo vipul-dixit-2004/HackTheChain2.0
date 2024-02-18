@@ -55,7 +55,7 @@ export default function NewFIR() {
       const provider = await connectToMetaMask();
       const signer = provider.getSigner();
 
-      const contractAddress = "0x947922D0C4E4e7c11BFAB575b08514824023B614";
+      const contractAddress = "0x29c91ade29644C7cDDCEBBa2D54401730951D7f8";
       const contractABI = [
         {
           constant: false,
