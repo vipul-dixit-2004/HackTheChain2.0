@@ -40,3 +40,6 @@ Note: make sure you have metamask installed.
 2. Gurnish singh
 3. Raj Singhal
 4. Harsh Raj
+
+<a href="https://74c62ed0-7528-4997-886c-dbc82d620ab8-00-1ua2gys1asay9.kirk.replit.dev/">#AboutUs</a>
+<a href="https://replit.com/@vipul-dixit-200/AboutUsorHackTheChain20">Replit</a>
