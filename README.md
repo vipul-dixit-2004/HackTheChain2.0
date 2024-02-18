@@ -17,8 +17,8 @@ India’s digitalization has led to a shift from traditional manual systems to a
 ## How to setup:
 
 The repository have two folders backend and front-end. 1. First run the following commands to install the dependencies
-`    cd backend
-   `
+`   cd backend
+  `
 `npm install`
 `cd front-end`
 again run the `npm install` command in front-end folder 2. Now set up Ganache, install it and then run the server 3. Deploy the smart contract using Remix.IDE 4. Use Dev Ganache Provider and enter the RPC Server 5. Back to the main dir run the backend server using `node app.js` and client application using `npm run dev`
@@ -35,7 +35,7 @@ Note: make sure you have metamask installed.
 
 ## Contributors:
 
-1)Vipul Dixit  
-2)Gurnish singh  
-3)Raj Singhal
-4)Harsh Raj
+1. Vipul Dixit
+2. Gurnish singh
+3. Raj Singhal
+4. Harsh Raj
