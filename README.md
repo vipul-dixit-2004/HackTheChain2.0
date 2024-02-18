@@ -1,4 +1,5 @@
 # Crypto F.I.R.
+<img width="300px" src="./logo.jpg"/>
 
 ## Blockchain-based Secure Storage for First Investigation Reports
 
