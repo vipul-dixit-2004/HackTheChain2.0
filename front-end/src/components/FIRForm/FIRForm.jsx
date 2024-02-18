@@ -1,168 +1,5 @@
-import "./NewFIR.css";
-import { useState } from "react";
-import axios from "axios";
-import { ethers } from "ethers";
-
-export default function NewFIR() {
-  const [suspectCheck, setSuspectcheck] = useState(false);
-  const [doubleCheck, setDoubleCheck] = useState(false);
-
-  async function submitForm() {
-    const inputclass = document.getElementsByClassName("inputclass");
-
-    const object = {};
-    for (let i = 0; i < inputclass.length; i++) {
-      object[i] = inputclass[i].value;
-    }
-    const response = await axios.post("http://localhost:80/encrypt", {
-      data: JSON.stringify(object),
-    });
-    let encryptedData = response.data.msg;
-    const contract = await makeChain();
-    insertRecord(contract, encryptedData);
-
-    console.log(encryptedData);
-  }
-  async function connectToMetaMask() {
-    // Check if MetaMask is installed
-    if (window.ethereum) {
-      try {
-        // Request access to MetaMask
-        await window.ethereum.request({ method: "eth_requestAccounts" });
-        // Create an ethers provider using MetaMask provider
-        const provider = new ethers.providers.Web3Provider(window.ethereum);
-        return provider;
-      } catch (error) {
-        // Handle errors
-        console.error("Error connecting to MetaMask:", error);
-        throw error;
-      }
-    } else {
-      // MetaMask not detected, handle accordingly
-      throw new Error("MetaMask is not installed");
-    }
-  }
-
-  async function makeChain() {
-    try {
-      // Connect to MetaMask
-      const provider = await connectToMetaMask();
-      const signer = provider.getSigner();
-
-      const contractAddress = "0x947922D0C4E4e7c11BFAB575b08514824023B614";
-      const contractABI = [
-        {
-          constant: false,
-          inputs: [
-            {
-              internalType: "string",
-              name: "_complain",
-              type: "string",
-            },
-          ],
-          name: "addRecord",
-          outputs: [],
-          payable: false,
-          stateMutability: "nonpayable",
-          type: "function",
-        },
-        {
-          anonymous: false,
-          inputs: [
-            {
-              indexed: false,
-              internalType: "uint256",
-              name: "recordId",
-              type: "uint256",
-            },
-            {
-              indexed: false,
-              internalType: "uint256",
-              name: "timestamp",
-              type: "uint256",
-            },
-            {
-              indexed: false,
-              internalType: "string",
-              name: "_complain",
-              type: "string",
-            },
-          ],
-          name: "recordAdded",
-          type: "event",
-        },
-        {
-          constant: true,
-          inputs: [
-            {
-              internalType: "uint256",
-              name: "_recordId",
-              type: "uint256",
-            },
-          ],
-          name: "getComplain",
-          outputs: [
-            {
-              internalType: "string",
-              name: "",
-              type: "string",
-            },
-          ],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          constant: true,
-          inputs: [],
-          name: "getRecord",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-        {
-          constant: true,
-          inputs: [],
-          name: "recordId",
-          outputs: [
-            {
-              internalType: "uint256",
-              name: "",
-              type: "uint256",
-            },
-          ],
-          payable: false,
-          stateMutability: "view",
-          type: "function",
-        },
-      ];
-      const contract = new ethers.Contract(
-        contractAddress,
-        contractABI,
-        signer
-      );
-      return contract;
-    } catch (error) {
-      console.log(error);
-    }
-  }
-
-  async function insertRecord(contract, complain) {
-    try {
-      const inject = await contract.addRecord(complain);
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
+export default function FIRForm({ data }) {
+  //   console.log(data)
   return (
     <>
       <div className="formHolder">
@@ -177,16 +14,19 @@ export default function NewFIR() {
                   <div id="fullname">
                     <input
                       type="text"
+                      defaultValue={data[0]}
                       id="informername"
                       placeholder="First Name"
                       className="inputclass"
-                      required
+                      disabled
                     />
                     <input
                       type="text"
+                      defaultValue={data[1]}
                       id="informerlastname"
                       placeholder="Last Name"
                       className="inputclass"
+                      disabled
                     />
                   </div>
                 </div>
@@ -195,9 +35,10 @@ export default function NewFIR() {
                   <input
                     type="tel"
                     id="informerphone"
+                    defaultValue={data[2]}
                     placeholder="Phone"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -205,9 +46,10 @@ export default function NewFIR() {
                   <input
                     type="email"
                     id="informeremail"
+                    defaultValue={data[3]}
                     placeholder="Email"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -215,9 +57,10 @@ export default function NewFIR() {
                   <input
                     type="text"
                     id="informeraddress"
+                    defaultValue={data[4]}
                     placeholder="Address"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -225,66 +68,73 @@ export default function NewFIR() {
                   <input
                     type="text"
                     id="informeradhaar"
+                    defaultValue={data[5]}
                     placeholder="Adhaar Number"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
               </div>
             </div>
 
-            <div className="checkbox">
-              <input
-                type="checkbox"
-                onChange={() => {
-                  setSuspectcheck(!suspectCheck);
-                }}
-                id="suspectcheck"
-                className="inputclass"
-              />
-              <label htmlFor="suspectcheck">Do you have a suspect</label>
-            </div>
-            {suspectCheck && (
-              <div id="suspectdetails" className="outerdetailsbox">
-                <h2>Suspect Details</h2>
-                <div className="innerdetailsbox">
-                  <div className="detailsbox">
-                    <label htmlFor="suspectname">Name</label>
-                    <div id="fullname">
+            {data[6] == "on" && (
+              <>
+                <div className="checkbox">
+                  <input
+                    type="checkbox"
+                    id="suspectcheck"
+                    className="inputclass"
+                    defaultChecked
+                  />
+                  <label htmlFor="suspectcheck">Do you have a suspect</label>
+                </div>
+                <div id="suspectdetails" className="outerdetailsbox">
+                  <h2>Suspect Details</h2>
+                  <div className="innerdetailsbox">
+                    <div className="detailsbox">
+                      <label htmlFor="suspectname">Name</label>
+                      <div id="fullname">
+                        <input
+                          type="text"
+                          id="suspectname"
+                          defaultValue={data[7]}
+                          placeholder="First Name"
+                          className="inputclass"
+                          disabled
+                        />
+                        <input
+                          type="text"
+                          id="suspectlastname"
+                          defaultValue={data[8]}
+                          placeholder="Last Name"
+                          className="inputclass"
+                          disabled
+                        />
+                      </div>
+                    </div>
+                    <div className="detailsbox">
+                      <label htmlFor="suspectaddress">Address</label>
                       <input
                         type="text"
-                        id="suspectname"
-                        placeholder="First Name"
+                        id="suspectaddress"
+                        placeholder="Address"
                         className="inputclass"
+                        disabled
                       />
+                    </div>
+                    <div className="detailsbox">
+                      <label htmlFor="suspectothers">Others</label>
                       <input
                         type="text"
-                        id="suspectlastname"
-                        placeholder="Last Name"
+                        id="suspectothers"
+                        placeholder="Eg. Phone, Desciption etc"
                         className="inputclass"
+                        disabled
                       />
                     </div>
                   </div>
-                  <div className="detailsbox">
-                    <label htmlFor="suspectaddress">Address</label>
-                    <input
-                      type="text"
-                      id="suspectaddress"
-                      placeholder="Address"
-                      className="inputclass"
-                    />
-                  </div>
-                  <div className="detailsbox">
-                    <label htmlFor="suspectothers">Others</label>
-                    <input
-                      type="text"
-                      id="suspectothers"
-                      placeholder="Eg. Phone, Desciption etc"
-                      className="inputclass"
-                    />
-                  </div>
                 </div>
-              </div>
+              </>
             )}
             <div id="crimedetails" className="outerdetailsbox">
               <h2>Crime Details</h2>
@@ -296,7 +146,7 @@ export default function NewFIR() {
                     id="crimetype"
                     placeholder="Type of Crime"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -305,7 +155,7 @@ export default function NewFIR() {
                     type="date"
                     id="crimedate"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -314,7 +164,7 @@ export default function NewFIR() {
                     type="time"
                     id="crimetime"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -324,7 +174,7 @@ export default function NewFIR() {
                     id="crimeplace"
                     placeholder="Place of Crime"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -334,7 +184,7 @@ export default function NewFIR() {
                     id="crimedescription"
                     placeholder="Description"
                     className="inputclass"
-                    required
+                    disabled
                   ></textarea>
                 </div>
                 <div className="detailsbox">
@@ -344,7 +194,7 @@ export default function NewFIR() {
                     id="Section"
                     placeholder="Section"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -354,7 +204,7 @@ export default function NewFIR() {
                     id="distance"
                     placeholder="Distance from Police station"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -364,6 +214,7 @@ export default function NewFIR() {
                     id="Others"
                     placeholder="Other Details"
                     className="inputclass"
+                    disabled
                   ></textarea>
                 </div>
               </div>
@@ -378,7 +229,7 @@ export default function NewFIR() {
                     id="stationname"
                     placeholder="Station Name"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -388,7 +239,7 @@ export default function NewFIR() {
                     id="stationnumber"
                     placeholder="Station Number"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -398,7 +249,7 @@ export default function NewFIR() {
                     id="stationaddress"
                     placeholder="Station Address"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
                 <div className="detailsbox">
@@ -408,7 +259,7 @@ export default function NewFIR() {
                     id="stationphone"
                     placeholder="Station Phone"
                     className="inputclass"
-                    required
+                    disabled
                   />
                 </div>
               </div>
@@ -418,24 +269,16 @@ export default function NewFIR() {
               <input
                 type="checkbox"
                 id="declaration"
-                onChange={() => {
-                  setDoubleCheck(!doubleCheck);
-                }}
+                defaultChecked
                 className="inputclass"
+                // disabled
               />
               <label htmlFor="declaration">
                 I hereby declare that all the information provided above is
-                correct to best of my knowledge.{" "}
+                correct to best of my knowledge.
               </label>
             </div>
           </form>
-          {doubleCheck && (
-            <div className="submitbutton">
-              <button onClick={submitForm} id="submit">
-                Submit
-              </button>
-            </div>
-          )}
         </div>
       </div>
     </>

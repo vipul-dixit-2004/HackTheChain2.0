@@ -2,33 +2,27 @@ import CardHolder from "../Card/CardHolder";
 import "./Dashboard.css";
 import { useEffect, useState } from "react";
 import { ethers } from "ethers";
-import Modal from "react-modal";
+import Modal from "../Modal/Modal";
+import axios from "axios";
 
 export default function Dashboard() {
   const [rows, setRows] = useState(0);
   const [contract, setContract] = useState(null);
   const [complain, setComplain] = useState("No complain");
   const [modalIsOpen, setIsOpen] = useState(false);
-  function openModal() {
+  const [decrypted, setDecrypted] = useState({});
+  async function openModal() {
+    const response = await axios.post("http://localhost:80/decrypt", {
+      data: decrypted,
+    });
+    const actualData = JSON.parse(response.data.msg);
+    setDecrypted(actualData);
+    console.log(actualData);
     setIsOpen(true);
   }
 
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-  }
-
-  function closeModal() {
+  const closeModal = () => {
     setIsOpen(false);
-  }
-  const customStyles = {
-    content: {
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
-    },
   };
 
   async function connectToMetaMask() {
@@ -162,15 +156,6 @@ export default function Dashboard() {
     }
   }
 
-  async function insertRecord(contract, complain) {
-    try {
-      const inject = await contract.addRecord(complain);
-      return true;
-    } catch (error) {
-      console.log(error);
-      return false;
-    }
-  }
   async function getRecord(contract, recordId) {
     let complain = await contract.getComplain(recordId);
     setComplain(complain);
@@ -192,18 +177,15 @@ export default function Dashboard() {
       });
     });
   }, []);
+
   return (
     <>
       {/* Modal for FIR display */}
       <Modal
-        isOpen={modalIsOpen}
-        onAfterOpen={afterOpenModal}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel={complain}
-      >
-        {complain}
-      </Modal>
+        modalIsOpen={modalIsOpen}
+        data={decrypted}
+        closeModal={closeModal}
+      ></Modal>
 
       <div className="menucontainer">
         <CardHolder
@@ -211,7 +193,7 @@ export default function Dashboard() {
           functionHandler={getRecord}
           contract={contract}
           complain={complain}
-          setComplain={setComplain}
+          setDecrypted={setDecrypted}
           modalFunction={openModal}
         />
       </div>

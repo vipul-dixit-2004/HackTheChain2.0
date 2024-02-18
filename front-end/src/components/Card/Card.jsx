@@ -1,11 +1,11 @@
+import "./Card.css";
 export default function Card({
   textContent,
   idx,
   contract,
   functionHandler,
-  complain,
-  setComplain,
-  openModal,
+  setDecrypted,
+  modalFunction,
 }) {
   return (
     <div className="entry">
@@ -15,8 +15,8 @@ export default function Card({
           className="styledetailsbutton"
           onClick={async () => {
             let complain = await functionHandler(contract, idx + 1);
-            setComplain(complain);
-            openModal();
+            setDecrypted(complain);
+            modalFunction();
           }}
         >
           Details

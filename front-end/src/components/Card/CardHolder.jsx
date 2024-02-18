@@ -1,12 +1,10 @@
 import Card from "./Card";
-import "./Card.css";
+
 export default function CardHolder({
   row,
-  getRecord,
   contract,
   functionHandler,
-  complain,
-  setComplain,
+  setDecrypted,
   modalFunction,
 }) {
   const rowArray = Array.from({ length: row }, (_, index) => index + 1);
@@ -17,8 +15,7 @@ export default function CardHolder({
       contract={contract}
       idx={idx}
       textContent={"FIR000" + element}
-      complain={complain}
-      setComplain={setComplain}
+      setDecrypted={setDecrypted}
       modalFunction={modalFunction}
     />
   ));
