@@ -5,9 +5,10 @@
 nav{
     display: flex;
     align-items: center;
-    background-color: rgb(183, 212, 214);
+    background-color: rgb(31, 20, 62);
     height: 80px;
     padding: 10px;
+    color:white;
     justify-content: space-around;
 }
 

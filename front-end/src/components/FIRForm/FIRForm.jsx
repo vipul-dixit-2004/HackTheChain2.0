@@ -117,6 +117,7 @@ export default function FIRForm({ data }) {
                       <input
                         type="text"
                         id="suspectaddress"
+                        defaultValue={data[9]}
                         placeholder="Address"
                         className="inputclass"
                         disabled
@@ -127,6 +128,7 @@ export default function FIRForm({ data }) {
                       <input
                         type="text"
                         id="suspectothers"
+                        defaultValue={data[10]}
                         placeholder="Eg. Phone, Desciption etc"
                         className="inputclass"
                         disabled
@@ -144,6 +146,7 @@ export default function FIRForm({ data }) {
                   <input
                     type="text"
                     id="crimetype"
+                    defaultValue={data[11]}
                     placeholder="Type of Crime"
                     className="inputclass"
                     disabled
@@ -154,6 +157,7 @@ export default function FIRForm({ data }) {
                   <input
                     type="date"
                     id="crimedate"
+                    defaultValue={data[12]}
                     className="inputclass"
                     disabled
                   />
@@ -163,6 +167,7 @@ export default function FIRForm({ data }) {
                   <input
                     type="time"
                     id="crimetime"
+                    defaultValue={data[13]}
                     className="inputclass"
                     disabled
                   />
@@ -171,6 +176,7 @@ export default function FIRForm({ data }) {
                   <label htmlFor="crimeplace">Place of Crime</label>
                   <input
                     type="text"
+                    defaultValue={data[14]}
                     id="crimeplace"
                     placeholder="Place of Crime"
                     className="inputclass"
@@ -182,6 +188,7 @@ export default function FIRForm({ data }) {
                   <textarea
                     type="text"
                     id="crimedescription"
+                    defaultValue={data[15]}
                     placeholder="Description"
                     className="inputclass"
                     disabled
@@ -190,8 +197,10 @@ export default function FIRForm({ data }) {
                 <div className="detailsbox">
                   <label htmlFor="Section">Section</label>
                   <input
+                    style={{ overflowX: scroll }}
                     type="text"
                     id="Section"
+                    defaultValue={data[16]}
                     placeholder="Section"
                     className="inputclass"
                     disabled
@@ -201,6 +210,7 @@ export default function FIRForm({ data }) {
                   <label htmlFor="distance">Distance from Police station</label>
                   <input
                     type="text"
+                    defaultValue={data[17]}
                     id="distance"
                     placeholder="Distance from Police station"
                     className="inputclass"
@@ -211,6 +221,7 @@ export default function FIRForm({ data }) {
                   <label htmlFor="Others">Others</label>
                   <textarea
                     type="text"
+                    defaultValue={data[18]}
                     id="Others"
                     placeholder="Other Details"
                     className="inputclass"
@@ -227,6 +238,7 @@ export default function FIRForm({ data }) {
                   <input
                     type="text"
                     id="stationname"
+                    defaultValue={data[19]}
                     placeholder="Station Name"
                     className="inputclass"
                     disabled
@@ -237,6 +249,7 @@ export default function FIRForm({ data }) {
                   <input
                     type="text"
                     id="stationnumber"
+                    defaultValue={data[20]}
                     placeholder="Station Number"
                     className="inputclass"
                     disabled
@@ -246,6 +259,7 @@ export default function FIRForm({ data }) {
                   <label htmlFor="stationaddress">Address</label>
                   <input
                     type="text"
+                    defaultValue={data[21]}
                     id="stationaddress"
                     placeholder="Station Address"
                     className="inputclass"
@@ -257,6 +271,7 @@ export default function FIRForm({ data }) {
                   <input
                     type="tel"
                     id="stationphone"
+                    defaultValue={data[22]}
                     placeholder="Station Phone"
                     className="inputclass"
                     disabled

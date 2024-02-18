@@ -1,0 +1,10 @@
+.menucontainer{
+    background-color: #191717;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.menucontainer p{
+    color:black;
+    font-weight: 600;
+}

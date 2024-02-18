@@ -1,18 +1,23 @@
 import "./Navbar.css";
 import { Link } from "react-router-dom";
 import logo from "../../assets/logo.png";
-export default function Navbar() {
+export default function Navbar({ location }) {
   return (
     <>
       <nav>
         <div className="logo">
-          <img src={logo} alt="" height={"80px"} />
+          <Link to="/DashBoard">
+            <img src={logo} alt="" height={"80px"} />
+          </Link>
         </div>
         <div>
-          <h2>Decentralised FIR System</h2>
+          <h2>DECENTRALISED FIR SYSTEM</h2>
         </div>
-
-        <Link to="/newFIR">File New FIR</Link>
+        {location == "http://localhost:5173/Dashboard" ? (
+          <Link to="/newFIR">File New FIR</Link>
+        ) : (
+          <Link to="/DashBoard">DashBoard</Link>
+        )}
       </nav>
     </>
   );

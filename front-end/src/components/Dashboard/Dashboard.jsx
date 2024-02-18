@@ -187,16 +187,14 @@ export default function Dashboard() {
         closeModal={closeModal}
       ></Modal>
 
-      <div className="menucontainer">
-        <CardHolder
-          row={rows}
-          functionHandler={getRecord}
-          contract={contract}
-          complain={complain}
-          setDecrypted={setDecrypted}
-          modalFunction={openModal}
-        />
-      </div>
+      <CardHolder
+        row={rows}
+        functionHandler={getRecord}
+        contract={contract}
+        complain={complain}
+        setDecrypted={setDecrypted}
+        modalFunction={openModal}
+      />
     </>
   );
 }

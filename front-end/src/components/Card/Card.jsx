@@ -1,4 +1,5 @@
 import "./Card.css";
+import fileImage from "../../assets/file.png";
 export default function Card({
   textContent,
   idx,
@@ -9,7 +10,10 @@ export default function Card({
 }) {
   return (
     <div className="entry">
-      <p>{textContent}</p>
+      <div class="content">
+        <h3>{textContent}</h3>
+        <img src={fileImage} width={"100px"} />
+      </div>
       <div className="buttoncontainer">
         <button
           className="styledetailsbutton"
@@ -21,7 +25,6 @@ export default function Card({
         >
           Details
         </button>
-        <button className="styledownloadbutton">Download</button>
       </div>
     </div>
   );

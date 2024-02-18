@@ -9,7 +9,7 @@ function App() {
 
   return (
     <Router>
-      <Navbar />
+      <Navbar location={window.location.href} />
       <div>
         <Routes>
           <Route path="/Dashboard" exact element={<Dashboard />} />
