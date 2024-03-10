@@ -1,16 +1,9 @@
 import "./Card.css";
 import fileImage from "../../assets/file.png";
-export default function Card({
-  textContent,
-  idx,
-  contract,
-  functionHandler,
-  setDecrypted,
-  modalFunction,
-}) {
+export default function Card({ textContent, idx, modalFunction }) {
   return (
     <div className="entry">
-      <div class="content">
+      <div className="content">
         <h3>{textContent}</h3>
         <img src={fileImage} width={"100px"} />
       </div>
@@ -18,9 +11,7 @@ export default function Card({
         <button
           className="styledetailsbutton"
           onClick={async () => {
-            let complain = await functionHandler(contract, idx + 1);
-            setDecrypted(complain);
-            modalFunction();
+            modalFunction(idx + 1);
           }}
         >
           Details

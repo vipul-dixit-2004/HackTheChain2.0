@@ -16,16 +16,17 @@ export default function NewFIR() {
     for (let i = 0; i < inputclass.length; i++) {
       object[i] = inputclass[i].value;
     }
-    const response = await axios.post("http://localhost:80/encrypt", {
+    const response = await axios.post("http://localhost:3000/encrypt", {
       data: JSON.stringify(object),
     });
-    let encryptedData = response.data.msg;
+    console.log(response);
+    let encryptedData = response.data.encrypted;
     const contract = await makeChain();
     setLoading(true);
     let status = await insertRecord(contract, encryptedData);
-    if (status) {
+    if (response.status) {
       setLoading(false);
-      isError(true);
+      setError(true);
     }
     console.log(encryptedData);
   }
@@ -55,7 +56,7 @@ export default function NewFIR() {
       const provider = await connectToMetaMask();
       const signer = provider.getSigner();
 
-      const contractAddress = "0x29c91ade29644C7cDDCEBBa2D54401730951D7f8";
+      const contractAddress = "0x98F64EC006c43E90436bE03182aC23b673539552"; // "0x29c91ade29644C7cDDCEBBa2D54401730951D7f8";
       const contractABI = [
         {
           constant: false,
@@ -208,7 +209,7 @@ export default function NewFIR() {
                       type="tel"
                       id="informerphone"
                       placeholder="Phone"
-                      maxlength="10"
+                      maxLength="10"
                       className="inputclass"
                       required
                     />
@@ -239,7 +240,7 @@ export default function NewFIR() {
                       type="text"
                       id="informeradhaar"
                       placeholder="Adhaar Number"
-                      maxlength="12"
+                      maxLength="12"
                       className="inputclass"
                       required
                     />
@@ -422,6 +423,7 @@ export default function NewFIR() {
                     <input
                       type="tel"
                       id="stationphone"
+                      maxLength={10}
                       placeholder="Station Phone"
                       className="inputclass"
                       required

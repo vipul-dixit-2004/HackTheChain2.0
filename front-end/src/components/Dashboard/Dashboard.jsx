@@ -11,11 +11,19 @@ export default function Dashboard() {
   const [complain, setComplain] = useState("No complain");
   const [modalIsOpen, setIsOpen] = useState(false);
   const [decrypted, setDecrypted] = useState({});
-  async function openModal() {
-    const response = await axios.post("http://localhost:80/decrypt", {
-      data: decrypted,
+  const [recordId, setRecordId] = useState(-1);
+  async function openModal(recordId) {
+    // const response = await axios.post("http://localhost:80/decrypt", {
+    //   data: decrypted,
+    // });
+    // const recordId = 2;
+    console.log(recordId);
+    const response = await axios.post("http://localhost:3000/getComplain", {
+      recordId: recordId,
     });
-    const actualData = JSON.parse(response.data.msg);
+    console.log(response);
+    // const actualData = JSON.parse(response.result);
+    const actualData = JSON.parse(response.data);
     setDecrypted(actualData);
     console.log(actualData);
     setIsOpen(true);
@@ -170,12 +178,17 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    makeChain().then((contract) => {
-      setContract(contract);
-      getId(contract).then((row) => {
-        setRows(row.toNumber());
+    // makeChain().then((contract) => {
+    //   setContract(contract);
+    //   getId(contract).then((row) => {
+    //     setRows(row.toNumber());
+    //   });
+    // });
+    fetch("http://localhost:3000/getRecordsCount")
+      .then((response) => response.json())
+      .then((data) => {
+        setRows(data.count);
       });
-    });
   }, []);
 
   return (
@@ -193,10 +206,11 @@ export default function Dashboard() {
       ) : ( */}
       <CardHolder
         row={rows}
-        functionHandler={getRecord}
-        contract={contract}
-        complain={complain}
-        setDecrypted={setDecrypted}
+        // functionHandler={getRecord}
+        // contract={contract}
+        // complain={complain}
+        // setRecordId={setRecordId}
+        // setDecrypted={setDecrypted}
         modalFunction={openModal}
       />
       {/* )} */}

@@ -1,0 +1,75 @@
+* {
+    padding: 0;
+    margin: 0;
+  }
+  
+  nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    height: 10vh;
+    background-color: rgb(41, 70, 165)
+  }
+  
+  #top-text {
+    font-size: 1.5rem;
+  }
+  
+  .main {
+    padding: 10px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 100%;
+    min-height: 90vh;
+    flex-wrap: wrap;
+  }
+  
+  .card {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+    padding: 40px;
+    background-color: aliceblue;
+    border-radius: 20px;
+    transition: 0.3s;
+    margin-bottom: 30px;
+  }
+  
+  .card:hover {
+    transform: scale(1.1);
+  }
+  
+  .card>div>img {
+    margin-top: 100px;
+    width: 180px;
+    /* aspect: ratio 1px / 1px;; */
+  }
+  
+  .img-holder {
+    border-radius: 100%;
+    overflow: hidden;
+    height: 180px;
+    width: 180px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .content {
+    font-size: 12px;
+  }
+  
+  .main {
+    background-image: url(https://miro.medium.com/v2/resize:fit:1200/1*Sgz7V-mTEanY5_rqqfBG4w.jpeg);
+    background-size: cover;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
+  }
+  
+  .social_media {
+    display: flex;
+    justify-content: space-evenly;
+  }

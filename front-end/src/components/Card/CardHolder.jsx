@@ -4,8 +4,9 @@ import "./CardHolder.css";
 export default function CardHolder({
   row,
   contract,
-  functionHandler,
-  setDecrypted,
+  // functionHandler,
+  // setDecrypted,
+  setRecordId,
   modalFunction,
 }) {
   const rowArray = Array.from({ length: row }, (_, index) => index + 1);
@@ -15,11 +16,11 @@ export default function CardHolder({
         <>
           <Card
             key={element}
-            functionHandler={functionHandler}
-            contract={contract}
+            // functionHandler={functionHandler}
+            // contract={contract}
             idx={idx}
             textContent={"FIR000" + element}
-            setDecrypted={setDecrypted}
+            // setDecrypted={setDecrypted}
             modalFunction={modalFunction}
           />
           <br />
